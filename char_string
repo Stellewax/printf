@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdarg.h>
+#include "main.h"
+
+int _printf(const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+
+    int count = 0;
+
+    while (*format != '\0') {
+        if (*format == '%') {
+            format++; // Move past '%'
+            switch (*format) {
+                case 'c': {
+                    int c = va_arg(args, int);
+                    putchar(c);
+                    count++;
+                    break;
+                }
+                case 's': {
+                    char *s = va_arg(args, char *);
+                    while (*s != '\0') {
+                        putchar(*s);
+                        s++;
+                        count++;
+                    }
+                    break;
+                }
+                case '%': {
+                    putchar('%');
+                    count++;
+                    break;
+                }
+                default: // Ignore unsupported specifiers
+                    break;
+            }
+        } else {
+            putchar(*format);
+            count++;
+        }
+        format++;
+    }
+
+    va_end(args);
+    return count;
+}
+
+int main() {
+    int num_chars = _printf("Hello, %s! This is %c test %% printf.\n", "world", 'a');
+    printf("Number of characters printed: %d\n", num_chars);
+    return 0;
+}
