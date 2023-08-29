@@ -1,0 +1,6 @@
+int main()
+{
+        int num_chars = _printf("Hello, %s! This is %c test %% printf.\n", "world", 'a');
+        printf("Number of characters printed: %d\n", num_chars);
+        return 0;
+}
