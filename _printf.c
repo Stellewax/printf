@@ -11,6 +11,7 @@
 int _printf(const char *format, ...)
 {
 	int count = 0;
+
 	char *s;
 	va_list args;
 
@@ -47,7 +48,6 @@ int _printf(const char *format, ...)
 			putchar(*format);
 			count++;
 		} format++;
-	}
-va_end(args);
+	} va_end(args);
 	return (count);
 }
